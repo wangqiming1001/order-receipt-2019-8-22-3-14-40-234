@@ -37,7 +37,8 @@ public class OrderReceipt {
             totSalesTx += salesTax;
             tot += lineItem.totalAmount() + salesTax;
         }
-        return printStatus(output, totSalesTx, tot);
+        String status = printStatus(output, totSalesTx, tot);
+        return status;
 	}
 	
     //prints the state tax & print total amount
