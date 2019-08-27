@@ -8,27 +8,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class OrderReceiptTest {
+	private static String MR_X = "Mr X";
+	private static String MILK = "milk";
+	private static String BISCUITS = "biscuits";
+	private static String CHOCOLATE = "chocolate";
+
+	
     @Test
     public void shouldPrintCustomerInformationOnOrder() {
-        Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<LineItem>());
+        //given
+		Order order = new Order(MR_X, "Chicago, 60601", new ArrayList<LineItem>());
         OrderReceipt receipt = new OrderReceipt(order);
-
+        //when
         String output = receipt.printReceipt();
-
-        assertThat(output).contains("Mr X", "Chicago, 60601");
+        //THEN
+        assertThat(output).contains(MR_X, "Chicago, 60601");
     }
 
     @Test
     public void shouldPrintLineItemAndSalesTaxInformation() {
+    	//given
         ArrayList<LineItem> lineItems = new ArrayList<LineItem>() {{
-            add(new LineItem("milk", 10.0, 2));
-            add(new LineItem("biscuits", 5.0, 5));
-            add(new LineItem("chocolate", 20.0, 1));
+            add(new LineItem(MILK, 10.0, 2));
+            add(new LineItem(BISCUITS, 5.0, 5));
+            add(new LineItem(CHOCOLATE, 20.0, 1));
         }};
         OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems));
-
+        //when
         String output = receipt.printReceipt();
-
+        //then
         assertThat(output).contains(
                 "milk\t10.0\t2\t20.0\n",
                 "biscuits\t5.0\t5\t25.0\n",
