@@ -12,17 +12,18 @@ public class OrderReceiptTest {
 	private static String MILK = "milk";
 	private static String BISCUITS = "biscuits";
 	private static String CHOCOLATE = "chocolate";
+	private static String CHICAGO_60601 = "Chicago, 60601";
 
 	
     @Test
     public void shouldPrintCustomerInformationOnOrder() {
         //given
-		Order order = new Order(MR_X, "Chicago, 60601", new ArrayList<LineItem>());
+		Order order = new Order(MR_X, CHICAGO_60601, new ArrayList<LineItem>());
         OrderReceipt receipt = new OrderReceipt(order);
         //when
         String output = receipt.printReceipt();
         //THEN
-        assertThat(output).contains(MR_X, "Chicago, 60601");
+        assertThat(output).contains(MR_X, CHICAGO_60601);
     }
 
     @Test

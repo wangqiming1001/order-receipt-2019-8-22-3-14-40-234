@@ -11,8 +11,8 @@ public class OrderReceipt {
 	private static String TOTAL_AMOUNT = "Total Amount";
     private Order order;
 
-    public OrderReceipt(Order o) {
-        this.order = o;
+    public OrderReceipt(Order order) {
+        this.order = order;
     }
 
     public String printReceipt() {
@@ -25,14 +25,7 @@ public class OrderReceipt {
         double totSalesTx = 0d;
         double tot = 0d;
         for (LineItem lineItem : order.getLineItems()) {
-            output.append(lineItem.getDescription());
-            output.append('\t');
-            output.append(lineItem.getPrice());
-            output.append('\t');
-            output.append(lineItem.getQuantity());
-            output.append('\t');
-            output.append(lineItem.calculateTotalAmount());
-            output.append('\n');
+        	output.append(lineItem.genrateItemsInformation());
             double salesTax = lineItem.calculateTotalAmount() * .10;
             totSalesTx += salesTax;
             tot += lineItem.calculateTotalAmount() + salesTax;
