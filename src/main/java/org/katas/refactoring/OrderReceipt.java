@@ -9,10 +9,10 @@ package org.katas.refactoring;
 public class OrderReceipt {
 	private static String SALES_TAX = "Sales Tax";
 	private static String TOTAL_AMOUNT = "Total Amount";
-    private Order o;
+    private Order order;
 
     public OrderReceipt(Order o) {
-        this.o = o;
+        this.order = o;
     }
 
     public String printReceipt() {
@@ -24,18 +24,18 @@ public class OrderReceipt {
 	private String printReceiptString(StringBuilder output) {
         double totSalesTx = 0d;
         double tot = 0d;
-        for (LineItem lineItem : o.getLineItems()) {
+        for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItem.getDescription());
             output.append('\t');
             output.append(lineItem.getPrice());
             output.append('\t');
             output.append(lineItem.getQuantity());
             output.append('\t');
-            output.append(lineItem.totalAmount());
+            output.append(lineItem.calculateTotalAmount());
             output.append('\n');
-            double salesTax = lineItem.totalAmount() * .10;
+            double salesTax = lineItem.calculateTotalAmount() * .10;
             totSalesTx += salesTax;
-            tot += lineItem.totalAmount() + salesTax;
+            tot += lineItem.calculateTotalAmount() + salesTax;
         }
         String status = printStatus(output, totSalesTx, tot);
         return status;
@@ -51,7 +51,7 @@ public class OrderReceipt {
 	//print headers & date, bill no, customer name
 	private void pringHeaders(StringBuilder output) {
         output.append("======Printing Orders======\n");
-        output.append(o.getCustomerName());
-        output.append(o.getCustomerAddress());
+        output.append(order.getCustomerName());
+        output.append(order.getCustomerAddress());
 	}
 }
